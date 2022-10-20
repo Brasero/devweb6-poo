@@ -2,8 +2,10 @@
 namespace App\Framework;
 
 use App\Framework\Renderer\PHPRenderer;
+use App\Framework\Renderer\RendererInterface;
 use App\Framework\Router\Router;
 use GuzzleHttp\Psr7\Response;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -30,12 +32,12 @@ class App
      */
     private $renderer;
 
-    public function __construct(array $modules = [], array $dependencies = [])
+    public function __construct(ContainerInterface $container, array $modules = [])
     {
-        $this->router = new Router();
-        $this->renderer = $dependencies['renderer'];
+        $this->router = $container->get(Router::class);
+        $this->renderer = $container->get(RendererInterface::class);
         foreach ($modules as $module) {
-            $this->modules[] = new $module($this->router, $this->renderer);
+            $this->modules[] = $container->get($module);
         }
     }
 

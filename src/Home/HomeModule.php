@@ -1,30 +1,33 @@
 <?php
 namespace App\Home;
 
+use App\Framework\Module;
 use App\Framework\Renderer\RendererInterface;
 use App\Framework\Router\Router;
 use GuzzleHttp\Psr7\ServerRequest;
 
-class HomeModule
+class HomeModule extends Module
 {
+
+    public const DEFINITIONS = __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
 
     private $renderer;
 
     private Router $router;
 
-    public function __construct(Router $router, RendererInterface $renderer)
+    public function __construct(string $prefix, Router $router, RendererInterface $renderer)
     {
         $this->router = $router;
         $this->renderer = $renderer;
         $this->renderer->addPath('home', __DIR__. DIRECTORY_SEPARATOR . 'view');
         $this->router->get(
-            "/",
+            $prefix,
             [$this, 'index'],
             "home.index"
         );
 
         $this->router->get(
-            "/home/hello/{name:[a-zA-Z]+}",
+            $prefix."/hello/{name:[a-zA-Z]+}",
             [$this, 'hello'],
             'home.hello'
         );
