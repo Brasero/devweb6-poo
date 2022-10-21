@@ -31,6 +31,7 @@ class App
      *
      */
     private $renderer;
+    private ContainerInterface $container;
 
     public function __construct(ContainerInterface $container, array $modules = [])
     {
@@ -39,6 +40,7 @@ class App
         foreach ($modules as $module) {
             $this->modules[] = $container->get($module);
         }
+        $this->container = $container;
     }
 
     public function run(ServerRequestInterface $request): ResponseInterface
@@ -74,5 +76,13 @@ class App
         } else {
             throw new \Exception("Le serveur n'a pas renvoyer de reponse valide.");
         }
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
     }
 }

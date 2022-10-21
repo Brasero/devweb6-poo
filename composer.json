@@ -22,6 +22,10 @@
         "zendframework/zend-expressive-fastroute" : "1.2.0",
         "http-interop/response-sender": "^1.0",
         "twig/twig": "^3.4",
-        "php-di/php-di": "^6.4"
+        "php-di/php-di": "^6.4",
+        "doctrine/orm": "^2.13",
+        "doctrine/dbal": "^3.4",
+        "doctrine/annotations": "^1.13",
+        "symfony/cache": "^5.4"
     }
 }

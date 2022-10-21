@@ -40,6 +40,12 @@ class Router
         $this->routes[] = $name;
     }
 
+    public function post(string $path, $callable, string $name = null): void
+    {
+        $this->router->addRoute(new ZendRoute($path, $callable, ['POST'], $name));
+        $this->routes[] = $name;
+    }
+
     public function match(ServerRequestInterface $request): ?Route
     {
         $result = $this->router->match($request);

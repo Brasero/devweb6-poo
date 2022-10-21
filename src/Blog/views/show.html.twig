@@ -2,6 +2,17 @@
 
 {% block body %}
 
-    <h1>Article avec le slug {{ slug }} et l'id {{ id }}</h1>
+    <h1>Article avec l'id {{ article.id }}</h1>
+
+    <p>
+        {{ article.content }}
+    </p>
+
+    {{ article.category.nom }}
+
+    <a href="{{ path('blog.delete', {id: article.id}) }}">Supprimer</a>
+    <a href="{{ path('blog.update', { id: article.id}) }}">
+        Modifier
+    </a>
 
 {% endblock %}

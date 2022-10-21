@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Ajouter un article</h1>
+
+    <form action="{{ path('blog.create') }}" method="POST">
+        <label for="titre">Titre de l'article</label>
+        <input type="text" name="titre" id="titre" />
+
+        <label for="contenu">Contenu de l'article</label>
+        <textarea name="content" id="contenu" cols="30" rows="10"></textarea>
+
+        <input type="submit" value="Valider">
+    </form>
+{% endblock %}
